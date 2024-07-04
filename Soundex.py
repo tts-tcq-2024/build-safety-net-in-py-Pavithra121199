@@ -16,10 +16,12 @@ def initialize_soundexcode(name):      #Function to initialize the Soundex code 
     return name[0].upper()
 
 def append_soundex_codes(soundex, name):        # Function to append Soundex codes for characters in name to soundex
-    prev_code = get_soundex_code(soundex[0])
+    if len(soundex) >= 4:
+        return   
+    prev_code = get_soundex_code(soundex[0])   
     for char in name[1:]:
         if len(soundex) >= 4:
-            break       
+            break
         code = get_soundex_code(char)
         if code != '0' and code != prev_code:
             soundex += code
