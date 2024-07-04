@@ -1,3 +1,4 @@
+
 def get_soundex_code(c):
     c = c.upper()
     mapping = {
@@ -32,6 +33,8 @@ def pad_with_zeros(soundex, s_index):    #Fills the remaining positions in sound
         s_index[0] += 1
 
 def generate_soundex(name):      #Generates the Soundex code for a given name
+    if not name:
+        return ""
     soundex = [''] * 4
     initialize_soundex(soundex, name[0])
     previous_code = ['']
