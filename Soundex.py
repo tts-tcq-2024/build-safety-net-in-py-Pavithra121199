@@ -11,33 +11,36 @@ def get_soundex_code(c):
     }
     return mapping.get(c, '0')         # Default to '0' for non-mapped characters
 
-def initialize_soundex(soundex, first_letter):    #Initializes the Soundex code with the first letter of the name
-    soundex[0] = first_letter.upper()
+def initialize_soundex(soundex, first_letter): #Initializes the Soundex code with the first letter of the name.
+    soundex.append(first_letter.upper())
 
-def handle_singlecharacter(current_char, soundex, s_index, previous_code):   # Handles processing of a single character to append its Soundex code to soundex
+def handle_single_character(current_char, soundex, s_index, previous_code):   #Handles processing of a single character to append its Soundex code to soundex.    
     code = get_soundex_code(current_char)
     if code != '0' and code != previous_code[0]:
-        soundex[s_index[0]] = code
+        soundex.append(code)
         s_index[0] += 1
         previous_code[0] = code
 
-def process_singlecharacter(name, soundex, s_index, previous_code):  # Processes each character in name to generate its Soundex code and append to soundex
+def process_characters(name, soundex, s_index, previous_code): #Processes each character in name to generate its Soundex code and append to soundex.    
     for i in range(1, len(name)):
         if s_index[0] >= 4:
             break
-        handle_singlecharacter(name[i], soundex, s_index, previous_code)
+        handle_single_character(name[i], soundex, s_index, previous_code)
 
-def pad_with_zeros(soundex, s_index):    #Fills the remaining positions in soundex with '0'
+def pad_with_zeros(soundex, s_index):      #Fills the remaining positions in soundex with '0'.
     while s_index[0] < 4:
-        soundex[s_index[0]] = '0'
+        soundex.append('0')
         s_index[0] += 1
 
-def generate_soundex(name):      #Generates the Soundex code for a given name
-    
+def generate_soundex(name):    # Generates the Soundex code for a given name.
+    if not name:
+        return "0000"  # Return "0000" for empty names
+
     soundex = []
     initialize_soundex(soundex, name[0])
     previous_code = ['']
     s_index = [1]
-    process_singlecharacter(name, soundex, s_index, previous_code)
-    pad_with_zeros(soundex, s_index)
-    return ''.join(soundex)[:4]
+    
+    process_characters(name, soundex, s_index, previous_code)
+    pad_with_zeros(soundex, s_index)    
+    return ''.join(soundex[:4])  # Ensure the output is exactly 4 characters
