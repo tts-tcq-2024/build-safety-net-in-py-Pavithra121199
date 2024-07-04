@@ -32,8 +32,6 @@ def pad_with_zeros(soundex, s_index):    #Fills the remaining positions in sound
         soundex[s_index[0]] = '0'
         s_index[0] += 1
 
-def 
-
 def generate_soundex(name):      #Generates the Soundex code for a given name
     
     soundex = []
