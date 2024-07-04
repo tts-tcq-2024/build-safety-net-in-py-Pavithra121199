@@ -32,13 +32,14 @@ def pad_with_zeros(soundex, s_index):    #Fills the remaining positions in sound
         soundex[s_index[0]] = '0'
         s_index[0] += 1
 
+def 
+
 def generate_soundex(name):      #Generates the Soundex code for a given name
-    if not name:
-        return ""
-    soundex = [''] * 4
+    
+    soundex = []
     initialize_soundex(soundex, name[0])
     previous_code = ['']
     s_index = [1]
     process_singlecharacter(name, soundex, s_index, previous_code)
     pad_with_zeros(soundex, s_index)
-    return ''.join(soundex)
+    return ''.join(soundex)[:4]
