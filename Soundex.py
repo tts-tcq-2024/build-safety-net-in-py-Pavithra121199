@@ -15,11 +15,15 @@ def initialize_soundex(soundex, first_letter): #Initializes the Soundex code wit
     soundex.append(first_letter.upper())
 
 def handle_single_character(current_char, soundex, s_index, previous_code):   #Handles processing of a single character to append its Soundex code to soundex.    
-    code = get_soundex_code(current_char)
-    if code != '0' and (current_char in 'hwy' or code != previous_code[0]) :
+    code = get_soundex_code(current_char) 
+    # Rule 1: If the current code is the same as the previous and not separated by 'h', 'w', or 'y', skip it
+    if code == previous_code[0]:
+        return  
+    # Rule 2: Handle 'h', 'w', 'y' separation for the first letter and subsequent characters
+    if s_index[0] == 1 or current_char not in 'hwy':
         soundex.append(code)
-        s_index[0] += 1
-        previous_code[0] = code
+        s_index[0] += 1  
+    previous_code[0] = code
 
 def process_characters(name, soundex, s_index, previous_code): #Processes each character in name to generate its Soundex code and append to soundex.    
     for i in range(1, len(name)):
