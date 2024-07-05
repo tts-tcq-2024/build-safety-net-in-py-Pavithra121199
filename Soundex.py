@@ -16,7 +16,7 @@ def initialize_soundex(soundex, first_letter): #Initializes the Soundex code wit
 
 def handle_single_character(current_char, soundex, s_index, previous_code):   #Handles processing of a single character to append its Soundex code to soundex.    
     code = get_soundex_code(current_char)
-    if code != '0' and code != previous_code[0]:
+    if code != '0' and (current_char in 'hwy' or code != previous_code[0]) :
         soundex.append(code)
         s_index[0] += 1
         previous_code[0] = code
