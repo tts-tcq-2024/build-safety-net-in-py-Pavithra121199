@@ -14,18 +14,20 @@ def get_soundex_code(c):
 def initialize_soundex(soundex, first_letter): #Initializes the Soundex code with the first letter of the name.
     soundex.append(first_letter.upper())
 
+
+
+def handle_samecode(current_char, previous_code):                 
+    code = get_soundex_code(current_char) 
+    if code == previous_code[0]:
+        return
+    previous_code[0] = code
+
 def handle_vowels(current_char, soundex, s_index, previous_code):    
     #  Handle 'AEIOU' separation for the first letter and subsequent characters
     code = get_soundex_code(current_char)
     if current_char not in 'aeiou' or s_index[0] != 1:
         soundex.append(code)
         s_index[0] += 1  
-    previous_code[0] = code
-
-def handle_samecode(current_char, previous_code):                 
-    code = get_soundex_code(current_char) 
-    if code == previous_code[0]:
-        return
     previous_code[0] = code
 
 def handle_hwy(current_char, soundex, s_index, previous_code):    
@@ -40,8 +42,9 @@ def process_characters(name, soundex, s_index, previous_code): #Processes each c
     for i in range(1, len(name)):
         if s_index[0] >= 4:
             break
-        handle_vowels(name[i], soundex, s_index, previous_code)
+
         handle_samecode(name[i],previous_code)
+        handle_vowels(name[i], soundex, s_index, previous_code)
         handle_hwy(name[i], soundex, s_index, previous_code)
 
 def pad_with_zeros(soundex, s_index):      #Fills the remaining positions in soundex with '0'.
