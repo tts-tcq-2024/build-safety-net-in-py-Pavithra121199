@@ -14,28 +14,24 @@ def get_soundex_code(c):
 def initialize_soundex(soundex, first_letter): #Initializes the Soundex code with the first letter of the name.
     soundex.append(first_letter.upper())
 
-
-
-def handle_samecode(current_char, previous_code):                 
-    code = get_soundex_code(current_char) 
+def handle_same_code(current_char, previous_code):   # Skip if current code is the same as the previous
+    code = get_soundex_code(current_char)
     if code == previous_code[0]:
         return
     previous_code[0] = code
 
-def handle_vowels(current_char, soundex, s_index, previous_code):     
-    # Handle 'AEIOU' separation for the first letter and subsequent characters
+def handle_vowels(current_char, soundex, s_index, previous_code):   #Skip vowels except the first letter
     code = get_soundex_code(current_char)
-    if s_index[0] == 1 or (current_char not in 'AEIOU' and previous_code[0] != '0'):
+    if s_index[0] == 1 or current_char not in 'AEIOUYHW':
         soundex.append(code)
-        s_index[0] += 1  
+        s_index[0] += 1
     previous_code[0] = code
 
-def handle_hwy(current_char, soundex, s_index, previous_code):    
-    #  Handle 'h', 'w', 'y' separation for the first letter and subsequent characters
+def handle_hwy(current_char, soundex, s_index, previous_code):   #Handle 'h', 'w', 'y' only if they follow a consonant
     code = get_soundex_code(current_char)
-    if s_index[0] == 1 or current_char not in 'hwy':
+    if s_index[0] == 1 or current_char not in 'HWY':
         soundex.append(code)
-        s_index[0] += 1  
+        s_index[0] += 1
     previous_code[0] = code
 
 def process_characters(name, soundex, s_index, previous_code): #Processes each character in name to generate its Soundex code and append to soundex.    
