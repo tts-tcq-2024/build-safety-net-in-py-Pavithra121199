@@ -22,10 +22,10 @@ def handle_samecode(current_char, previous_code):
         return
     previous_code[0] = code
 
-def handle_vowels(current_char, soundex, s_index, previous_code):    
-    #  Handle 'AEIOU' separation for the first letter and subsequent characters
+def handle_vowels(current_char, soundex, s_index, previous_code):     
+    # Handle 'AEIOU' separation for the first letter and subsequent characters
     code = get_soundex_code(current_char)
-    if current_char not in 'aeiou' or s_index[0] != 1:
+    if s_index[0] == 1 or (current_char not in 'AEIOU' and previous_code[0] != '0'):
         soundex.append(code)
         s_index[0] += 1  
     previous_code[0] = code
