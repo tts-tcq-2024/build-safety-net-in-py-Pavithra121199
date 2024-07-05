@@ -13,6 +13,19 @@ def get_soundex_code(c):
 def initialize_soundex(soundex, first_letter): #Initializes the Soundex code with the first letter of the name.
     soundex.append(first_letter.upper())
 
+def process_single_character(current_char, previous_char, soundex, s_index, previous_code):
+    current_code = get_soundex_code(current_char)
+    previous_code_value = previous_code[0]
+    if current_code == '':                   # Skip if it is a non-mapped character
+        return
+    if current_code == previous_code_value and not (
+            previous_char in 'AEIOU' or (previous_char in 'HWY' and previous_char)):               # Skip if current code is the same as the previous and not separated by a vowel or HWY
+        return
+
+    soundex.append(current_code)
+    s_index[0] += 1
+    previous_code[0] = current_code
+
 def process_single_character(current_char, previous_char, soundex, s_index, previous_code):    
     code = get_soundex_code(current_char)
     prev_code = get_soundex_code(previous_char)
