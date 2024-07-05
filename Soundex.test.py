@@ -12,7 +12,7 @@ class TestSoundex(unittest.TestCase):
     def testcases(self):
         self.assertEqual(generate_soundex("Radhakrishnan"),"R326")  #Random name more than 4 characters
         self.assertEqual(generate_soundex("X"), "X000")            # Single character non-vowel
-        self.assertEqual(generate_soundex("aeiou"),"0000")         # All vowels
+        self.assertEqual(generate_soundex("aeiou"),"A000")         # All vowels
         self.assertEqual(generate_soundex("Quite"), "Q300")        
         self.assertEqual(generate_soundex("Quiet"), "Q300")        # Similar sound 
         self.assertEqual(generate_soundex("0A2B"), "A100")         # Non-alphabetic and pad with zeros
