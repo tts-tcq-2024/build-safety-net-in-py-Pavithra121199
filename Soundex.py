@@ -14,7 +14,7 @@ def get_soundex_code(c):
 def initialize_soundex(soundex, first_letter): #Initializes the Soundex code with the first letter of the name.
     soundex.append(first_letter.upper())
 
-def handle_same_code(current_char, previous_code):   # Skip if current code is the same as the previous
+def handle_samecode(current_char, previous_code):   # Skip if current code is the same as the previous
     code = get_soundex_code(current_char)
     if code == previous_code[0]:
         return
