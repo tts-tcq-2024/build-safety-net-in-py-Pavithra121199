@@ -13,33 +13,24 @@ def get_soundex_code(c):
 def initialize_soundex(soundex, first_letter): #Initializes the Soundex code with the first letter of the name.
     soundex.append(first_letter.upper())
 
+def is_non_mapped_character(c):
+    return get_soundex_code(c) == ''
+
+def is_same_code_and_not_separated(code, previous_code, previous_char):
+    return code == previous_code and previous_char not in 'AEIOU'
+
 def process_single_character(current_char, previous_char, soundex, s_index, previous_code):
-    current_code = get_soundex_code(current_char)
-    previous_code_value = previous_code[0]
-    if current_code == '':                   # Skip if it is a non-mapped character
-        return
-    if current_code == previous_code_value and not (
-            previous_char in 'AEIOU' or (previous_char in 'HWY' and previous_char)):               # Skip if current code is the same as the previous and not separated by a vowel or HWY
-        return
-
-    soundex.append(current_code)
-    s_index[0] += 1
-    previous_code[0] = current_code
-
-def process_single_character(current_char, previous_char, soundex, s_index, previous_code):    
     code = get_soundex_code(current_char)
-    prev_code = get_soundex_code(previous_char)
-
-    if code == '':                         # Skip if it is a non-mapped character
-        return 
-	
-    if code == previous_code[0] and previous_char not in 'AEIOU':        # Skip if current code is the same as the previous and not separated by a vowel
-    	return
+    prev_code = previous_code[0]
+    if is_non_mapped_character(current_char):
+        return
+    if is_same_code_and_not_separated(code, prev_code, previous_char):
+        return
     soundex.append(code)
     s_index[0] += 1
     previous_code[0] = code
-
-def process_characters(name, soundex, s_index, previous_code):
+	
+def process_allcharacters(name, soundex, s_index, previous_code):
     previous_char = name[0].upper()
     for i in range(1, len(name)):
         if s_index[0] >= 4:
@@ -62,7 +53,7 @@ def generate_soundex(name):             # Generates the Soundex code for a given
     previous_code = [get_soundex_code(name[0])]
     s_index = [1]
 
-    process_characters(name, soundex, s_index, previous_code)
+    process_allcharacters(name, soundex, s_index, previous_code)
     pad_with_zeros(soundex, s_index)
 
     return ''.join(soundex[:4])  # Ensure the output is exactly 4 characters
