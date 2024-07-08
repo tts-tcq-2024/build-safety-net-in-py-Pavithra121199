@@ -21,7 +21,7 @@ class TestSoundex(unittest.TestCase):
     def test_repeatingcharacters_vowelsignored(self):
         self.assertEqual(generate_soundex("APPLE"), "A140")   
     def test_consecutive_sameletters(self):
-        self.assertEqual(generate_soundex("HARRYPOTTER"), "H613")     # Example with same consecutive letters, containing 'y' which should be ignored   
+        self.assertEqual(generate_soundex("HARRYPOTTER"), "H613")      # Example with same consecutive letters, containing 'y' which should be ignored   
     def test_same_consecutivecode_separatedbyvowel(self):
         self.assertEqual(generate_soundex("HANUMAN"), "H555")         # Example with same consecutive code separated by a vowel - coded twice
     def test_same_consecutivecodes(self):
