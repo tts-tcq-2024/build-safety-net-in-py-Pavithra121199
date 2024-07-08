@@ -1,13 +1,15 @@
+#Global mapping for soundex codes
+mapping = {
+    'B': '1', 'F': '1', 'P': '1', 'V': '1',
+    'C': '2', 'G': '2', 'J': '2', 'K': '2', 'Q': '2', 'S': '2', 'X': '2', 'Z': '2',
+    'D': '3', 'T': '3',
+    'L': '4',
+    'M': '5', 'N': '5',
+    'R': '6'
+}
+
 def get_soundex_code(c):
     c = c.upper()
-    mapping = {
-        'B': '1', 'F': '1', 'P': '1', 'V': '1',
-        'C': '2', 'G': '2', 'J': '2', 'K': '2', 'Q': '2', 'S': '2', 'X': '2', 'Z': '2',
-        'D': '3', 'T': '3',
-        'L': '4',
-        'M': '5', 'N': '5',
-        'R': '6'
-    }
     return mapping.get(c, '')                 # Default to '' for non-mapped characters
 
 def initialize_soundex(soundex, first_letter): #Initializes the Soundex code with the first letter of the name.
