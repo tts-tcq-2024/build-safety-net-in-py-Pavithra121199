@@ -12,7 +12,7 @@ def get_soundex_code(c):
     c = c.upper()
     return mapping.get(c, '')                 # Default to '' for non-mapped characters
 
-def initialize_soundex(soundex, first_letter):                  #Initializes the Soundex code with the first letter of the name
+def initialize_soundexcode_withfirstletter(soundex, first_letter):
     soundex.append(first_letter.upper())
 
 def is_non_mapped_character(c):
@@ -49,7 +49,6 @@ def pad_with_zeros(soundex, s_index):
 def generate_soundex(name):            
     if not name:
         return "0000"         # for empty string
-
     soundex = []
     initialize_soundex(soundex, name[0])
     previous_code = [get_soundex_code(name[0])]
