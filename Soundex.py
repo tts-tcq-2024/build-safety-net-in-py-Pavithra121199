@@ -12,7 +12,7 @@ def get_soundex_code(c):
     c = c.upper()
     return mapping.get(c, '')                 # Default to '' for non-mapped characters
 
-def initialize_soundex(soundex, first_letter): #Initializes the Soundex code with the first letter of the name.
+def initialize_soundex(soundex, first_letter):                  #Initializes the Soundex code with the first letter of the name
     soundex.append(first_letter.upper())
 
 def is_non_mapped_character(c):
@@ -41,14 +41,14 @@ def process_allcharacters(name, soundex, s_index, previous_code):
         process_single_character(current_char, previous_char, soundex, s_index, previous_code)
         previous_char = current_char
 
-def pad_with_zeros(soundex, s_index):             #Fills the remaining positions in soundex with '0'.
+def pad_with_zeros(soundex, s_index):
     while s_index[0] < 4:
         soundex.append('0')
         s_index[0] += 1
 
-def generate_soundex(name):             # Generates the Soundex code for a given name.
+def generate_soundex(name):            
     if not name:
-        return "0000"  # Return "0000" for empty names
+        return "0000"         # for empty string
 
     soundex = []
     initialize_soundex(soundex, name[0])
@@ -58,4 +58,4 @@ def generate_soundex(name):             # Generates the Soundex code for a given
     process_allcharacters(name, soundex, s_index, previous_code)
     pad_with_zeros(soundex, s_index)
 
-    return ''.join(soundex[:4])  # Ensure the output is exactly 4 characters
+    return ''.join(soundex[:4])               # Ensure the output is exactly 4 characters
