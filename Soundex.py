@@ -50,7 +50,7 @@ def generate_soundex(name):
     if not name:
         return "0000"         # for empty string
     soundex = []
-    initialize_soundex(soundex, name[0])
+    initialize_soundexcode_withfirstletter(soundex, name[0])
     previous_code = [get_soundex_code(name[0])]
     s_index = [1]
 
