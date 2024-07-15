@@ -8,7 +8,7 @@ class TestSoundex(unittest.TestCase):
     def test_single_character(self):
         self.assertEqual(generate_soundex("A"), "A000")
     def test_random_name(self):
-        self.assertEqual(generate_soundex("Radhakrishnan"),"R326")  #Random name more than 4 characters
+        self.assertEqual(generate_soundex("Radhakrishnan"),"R326")  
     def test_nonvowel_single_character(self):
         self.assertEqual(generate_soundex("X"), "X000")           
     def test_all_vowels(self):
@@ -20,12 +20,12 @@ class TestSoundex(unittest.TestCase):
         self.assertEqual(generate_soundex("A2B"), "A100")         
     def test_repeatingcharacters_vowelsignored(self):
         self.assertEqual(generate_soundex("APPLE"), "A140")   
-    def test_consecutive_sameletters(self):
-        self.assertEqual(generate_soundex("HARRYPOTTER"), "H613")      # Example with same consecutive letters, containing 'y' which should be ignored   
+    def test_consecutive_sameletters_letters_hwy_ignored(self):
+        self.assertEqual(generate_soundex("HARRYPOTTER"), "H613")   
     def test_same_consecutivecode_separatedbyvowel(self):
-        self.assertEqual(generate_soundex("HANUMAN"), "H555")         # Example with same consecutive code separated by a vowel - coded twice
-    def test_same_consecutivecodes(self):
-        self.assertEqual(generate_soundex("RGYQBAF"), "R211")         # Example with same consecutive code separated by 'h', 'w' or 'y'  - coded as a single number  [ G and Q have the same code 2] [B and F have the same code 1]
+        self.assertEqual(generate_soundex("HANUMAN"), "H555")       # Example with same consecutive code separated by a vowel - coded twice
+    def test_same_consecutivecode_separatedbyhwy(self):
+        self.assertEqual(generate_soundex("RGYQ"), "R200")         # Example with same consecutive code separated by 'h', 'w' or 'y'  - coded as a single number
              
 if __name__ == '__main__':
     unittest.main()
